@@ -1,24 +1,22 @@
 package Starpos.starpos.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import Starpos.starpos.dto.EquipInfoDto;
 import Starpos.starpos.entity.EquipInfo;
 import Starpos.starpos.repository.EquipRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class EquipService {
 
 	private final EquipRepository equipRepository;
-	
-	public EquipService(EquipRepository equipRepository) {
-		this.equipRepository = equipRepository;
-	}
-	
-	public List<EquipInfo> searchEquip() {		
-		return equipRepository.findAll();
+			
+	public List<EquipInfoDto> searchEquip(String userId) {				
+		return equipRepository.findByUserid(userId).stream().map(EquipInfo::toDto).collect(Collectors.toList());		
 	}
 }

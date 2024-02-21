@@ -1,20 +1,15 @@
-package Starpos.starpos.entity;
+package Starpos.starpos.dto;
 
-import Starpos.starpos.dto.EquipInfoDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import Starpos.starpos.entity.EquipInfo;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-@Entity
-public class EquipInfo {
+@Setter
+public class EquipInfoDto {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long seq;    
+	private Long seq;	    
     private Integer orders;
     private String name;
     private Integer levels;
@@ -25,15 +20,10 @@ public class EquipInfo {
     private Integer upgradecount;
     private String job;
     private String equiptype;
-    private String userid;      
-    
-    public EquipInfo() {
-    	
-    }
-
+    private String userid;
 
     @Builder
-	public EquipInfo(Long seq, Integer orders, String name, Integer levels, String imgurl, Integer starpos,
+	public EquipInfoDto(Long seq, Integer orders, String name, Integer levels, String imgurl, Integer starpos,
 			Integer maxstarpos, Integer changecount, Integer upgradecount, String job, String equiptype,
 			String userid) {		
 		this.seq = seq;
@@ -50,9 +40,8 @@ public class EquipInfo {
 		this.userid = userid;
 	}
     
-    
-    public EquipInfoDto toDto() {
-    	return EquipInfoDto.builder()
+    public EquipInfo toEntity() {
+    	return EquipInfo.builder()
 			.seq(seq)
 			.orders(orders)
 			.name(name)
@@ -67,5 +56,5 @@ public class EquipInfo {
 			.userid(userid)
 			.build();
     }
-    
+
 }
