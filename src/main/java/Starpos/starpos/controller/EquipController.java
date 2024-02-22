@@ -18,5 +18,6 @@ public class EquipController {
 	@GetMapping("/search")
 	public List<EquipInfoDto> searchEquip(@RequestParam(value= "userId") String userId) {				
 		return equipService.searchEquip("admin");
+		
 	}
 }
