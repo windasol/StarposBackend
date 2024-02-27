@@ -9,7 +9,7 @@ import Starpos.starpos.entity.EquipInfo;
 import lombok.AllArgsConstructor;
 
 @Repository
-public interface EquipRepository extends JpaRepository<EquipInfo, Integer> {
+public interface EquipRepository extends JpaRepository<EquipInfo, Long> {
 
 	public List<EquipInfo> findByUserid(String userId);
 }
