@@ -1,21 +1,17 @@
-package Starpos.starpos.entity;
+package Starpos.starpos.dto;
 
-import Starpos.starpos.dto.EtcInfoDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import Starpos.starpos.entity.EtcInfo;
+import Starpos.starpos.entity.Stats;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-@Getter
-@Entity
+@Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
-public class EtcInfo {
+public class EtcInfoDto {
 	
-	@Id
 	private int seq;
 	private String type;
 	private int orders;
@@ -23,17 +19,16 @@ public class EtcInfo {
 	private String description;
 	private String imgUrl;
 	private String userId;
-	
-	public EtcInfoDto toDto() {
-		return EtcInfoDto.builder()
+		
+	public EtcInfo toDto() {
+		return EtcInfo.builder()
 			.seq(seq)
 			.type(type)
 			.orders(orders)
 			.name(name)
 			.description(description)
 			.imgUrl(imgUrl)
-			.userId(userId)
+			.userId(userId)						
 			.build();
 	}
-	
 }

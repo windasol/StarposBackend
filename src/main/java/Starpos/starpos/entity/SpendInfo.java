@@ -1,12 +1,18 @@
 package Starpos.starpos.entity;
 
+import Starpos.starpos.dto.SpendInfoDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SpendInfo {
 	
 	@Id
@@ -16,17 +22,20 @@ public class SpendInfo {
 	private String name;
 	private String description;
 	private int count;
-	private String imgurl;
+	private String imgUrl;
+	private String userId;
 	
-	@Builder
-	public SpendInfo(int seq, String type, int orders, String name, String description, int count, String imgurl) {		
-		this.seq = seq;
-		this.type = type;
-		this.orders = orders;
-		this.name = name;
-		this.description = description;
-		this.count = count;
-		this.imgurl = imgurl;
+	public SpendInfoDto toDto() {
+		return SpendInfoDto.builder()
+			.seq(seq)
+			.type(type)
+			.orders(orders)
+			.name(name)
+			.description(description)
+			.count(count)
+			.imgUrl(imgUrl)
+			.userId(userId)
+			.build();
 	}
 	
 	

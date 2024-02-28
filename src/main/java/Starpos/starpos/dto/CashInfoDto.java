@@ -1,21 +1,15 @@
-package Starpos.starpos.entity;
+package Starpos.starpos.dto;
 
-import Starpos.starpos.dto.CashInfoDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import Starpos.starpos.entity.CashInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-@Getter
-@Entity
+@Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
-public class CashInfo {
+public class CashInfoDto {	
 	
-	@Id
 	private int seq;
 	private String type;
 	private int orders;
@@ -24,8 +18,8 @@ public class CashInfo {
 	private String imgUrl;
 	private String userId;
 	
-	public CashInfoDto toDto() {
-		return CashInfoDto.builder()
+	public CashInfo toEntity() {
+		return CashInfo.builder()
 			.seq(seq)
 			.type(type)
 			.orders(orders)
@@ -35,4 +29,5 @@ public class CashInfo {
 			.userId(userId)
 			.build();
 	}
+	
 }

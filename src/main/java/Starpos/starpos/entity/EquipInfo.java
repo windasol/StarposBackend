@@ -2,14 +2,24 @@ package Starpos.starpos.entity;
 
 import Starpos.starpos.dto.EquipInfoDto;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Transient;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class EquipInfo {
 	
 	@Id
@@ -18,44 +28,22 @@ public class EquipInfo {
 	private String type;
     private Integer orders;
     private String name;
-    private Integer levels;
-    private String imgurl;
+    private Integer level;
+    private String imgUrl;
     private Integer starpos;
-    private Integer starposfinish;
-    private Integer maxstarpos;
-    private Integer changecount;
-    private Integer ischange;
-    private Integer upgradecount;    
+    private boolean starposFinish;
+    private Integer maxStarpos;
+    private Integer changeCount;
+    private Integer isChange;
+    private Integer upgradeCount;    
     private String job;
-    private String equiptype;
-    private String userid;      
+    private String equipType;
+    private boolean destroy;
+    private String userId;      
     
-    public EquipInfo() {
-    	
-    }
-
-    @Builder
-	public EquipInfo(Long seq, String type, Integer orders, String name, Integer levels, String imgurl, Integer starpos,
-			Integer starposfinish, Integer maxstarpos, Integer changecount, Integer ischange, Integer upgradecount,
-			String job, String equiptype, String userid) {		
-		this.seq = seq;
-		this.type = type;
-		this.orders = orders;
-		this.name = name;
-		this.levels = levels;
-		this.imgurl = imgurl;
-		this.starpos = starpos;
-		this.starposfinish = starposfinish;
-		this.maxstarpos = maxstarpos;
-		this.changecount = changecount;
-		this.ischange = ischange;
-		this.upgradecount = upgradecount;
-		this.job = job;
-		this.equiptype = equiptype;
-		this.userid = userid;
-	}
-    
-    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "seq", referencedColumnName = "itemSeq")
+	private Stats stats;
     
     public EquipInfoDto toDto() {
     	return EquipInfoDto.builder()
@@ -63,18 +51,19 @@ public class EquipInfo {
 			.type(type)
 			.orders(orders)
 			.name(name)
-			.levels(levels)
-			.imgurl(imgurl)
+			.level(level)
+			.imgUrl(imgUrl)
 			.starpos(starpos)
-			.starposfinish(starposfinish)
-			.maxstarpos(maxstarpos)
-			.changecount(changecount)
-			.ischange(ischange)
-			.upgradecount(upgradecount)
+			.starposFinish(starposFinish)
+			.maxStarpos(maxStarpos)
+			.changeCount(changeCount)
+			.isChange(isChange)
+			.upgradeCount(upgradeCount)
 			.job(job)
-			.equiptype(equiptype)
-			.userid(userid)
+			.equipType(equipType)
+			.userId(userId)		
+			.stats(stats)
+			.destroy(destroy)
 			.build();
     }
-    
 }

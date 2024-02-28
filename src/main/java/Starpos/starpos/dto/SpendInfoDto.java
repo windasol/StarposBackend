@@ -1,39 +1,33 @@
-package Starpos.starpos.entity;
+package Starpos.starpos.dto;
 
-import Starpos.starpos.dto.EtcInfoDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import Starpos.starpos.entity.SpendInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-@Getter
-@Entity
+@Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
-public class EtcInfo {
-	
-	@Id
+public class SpendInfoDto {	
 	private int seq;
 	private String type;
 	private int orders;
 	private String name;
 	private String description;
+	private int count;
 	private String imgUrl;
-	private String userId;
+	private String userId;	
 	
-	public EtcInfoDto toDto() {
-		return EtcInfoDto.builder()
+	public SpendInfo toEntity() {
+		return SpendInfo.builder()
 			.seq(seq)
 			.type(type)
 			.orders(orders)
 			.name(name)
 			.description(description)
+			.count(count)
 			.imgUrl(imgUrl)
 			.userId(userId)
 			.build();
-	}
-	
+	}	
 }
