@@ -21,4 +21,17 @@ public class EtcInfoServiceImpl implements EtcInfoService {
 		return etcInfoRepository.findByUserId(userId).stream()
 				.map(EtcInfo::toDto).collect(Collectors.toList());
 	}
+	
+	public void updateEtc(EtcInfoDto dto) {
+		EtcInfo etc = EtcInfo.builder()
+				.seq(dto.getSeq())
+				.type(dto.getType())
+				.orders(dto.getOrders())
+				.name(dto.getName())
+				.description(dto.getDescription())
+				.imgUrl(dto.getImgUrl())
+				.userId(dto.getUserId())
+				.build();
+		etcInfoRepository.save(etc);
+	}
 }

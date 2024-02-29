@@ -51,8 +51,23 @@ public class ItemController {
 	}
 	
 	@PostMapping("/upgrade-equip")
-	public void upgradeEquip(@RequestBody EquipInfoDto equipInfoDto) {		
-		equipInfoServiceImpl.upgradeEquip(equipInfoDto);
+	public void upgradeEquip(@RequestBody EquipInfoDto dto) {		
+		equipInfoServiceImpl.upgradeEquip(dto);
+	}
+	
+	@PostMapping("/upgrade-spend")
+	public void upgradeSpend(@RequestBody SpendInfoDto dto) {		
+		spendServiceImpl.upgradeSpend(dto);
+	}
+	
+	@PostMapping("/upgrade-etc")
+	public void upgradeEtc(@RequestBody EtcInfoDto dto) {		
+		etcInfoServiceImpl.updateEtc(dto);
+	}
+	
+	@PostMapping("/upgrade-cash")
+	public void upgradeCash(@RequestBody CashInfoDto dto) {		
+		cashInfoServiceImpl.updateCash(dto);
 	}
 	
 	

@@ -4,10 +4,12 @@ import Starpos.starpos.entity.CashInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class CashInfoDto {	
 	
 	private int seq;

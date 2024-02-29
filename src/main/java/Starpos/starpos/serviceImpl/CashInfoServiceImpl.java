@@ -21,4 +21,16 @@ public class CashInfoServiceImpl implements CashInfoService {
 				.map(CashInfo::toDto).collect(Collectors.toList());
 	}
 
+	public void updateCash(CashInfoDto dto) {
+		CashInfo cash = CashInfo.builder()
+				.seq(dto.getSeq())
+				.type(dto.getType())
+				.orders(dto.getOrders())
+				.name(dto.getName())
+				.level(dto.getLevel())
+				.imgUrl(dto.getImgUrl())
+				.userId(dto.getUserId())
+				.build();
+		cashInfoRepository.save(cash);
+	}
 }

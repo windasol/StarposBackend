@@ -20,4 +20,19 @@ public class SpendInfoServiceImpl implements SpendInfoService {
 		return spendInfoRepository.findByUserId(userId).stream()
 				.map(SpendInfo::toDto).collect(Collectors.toList()) ;
 	}
+	
+	public void upgradeSpend(SpendInfoDto dto) {
+		SpendInfo spend = SpendInfo.builder()
+				.seq(dto.getSeq())
+				.type(dto.getType())
+				.orders(dto.getOrders())
+				.name(dto.getName())
+				.description(dto.getDescription())
+				.count(dto.getCount())
+				.imgUrl(dto.getImgUrl())
+				.userId(dto.getUserId())
+				.build();
+		
+		spendInfoRepository.save(spend);
+	}
 }
