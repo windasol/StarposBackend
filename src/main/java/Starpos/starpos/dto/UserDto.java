@@ -1,20 +1,19 @@
-package Starpos.starpos.entity;
+package Starpos.starpos.dto;
 
-import Starpos.starpos.dto.UserDto;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Users{
-	@Id
+public class UserDto {
 	private int userSeq;
 	private String userId;
 	private String userPw;
@@ -24,21 +23,4 @@ public class Users{
 	private boolean isLogin;
 	private String status;
 	private String authority;
-	
-	public UserDto toDto() {
-		return UserDto.builder()
-			.userSeq(userSeq)
-			.userId(userId)
-			.userPw(userPw)
-			.email(email)
-			.phone(phone)
-			.name(name)
-			.isLogin(isLogin)
-			.status(status)
-			.authority(authority)
-			.build();
-	}
-	
 }
-
-

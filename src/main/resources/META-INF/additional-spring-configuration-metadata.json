@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "com.dong.server.secret.key",
+  "type": "java.lang.String",
+  "description": "A description for 'com.dong.server.secret.key'"
+}]}
