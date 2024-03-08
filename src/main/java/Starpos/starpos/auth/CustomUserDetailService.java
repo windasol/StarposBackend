@@ -1,14 +1,15 @@
 package Starpos.starpos.auth;
 
+import java.util.Optional;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import Starpos.starpos.dto.CustomUser;
 import Starpos.starpos.entity.Users;
 import Starpos.starpos.repository.UserRepository;
-import Starpos.starpos.serviceImpl.UserServiceImpl;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,25 +18,26 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
 
-	private final UserServiceImpl userServiceImpl;	
+	private final UserRepository userRepository;	
 
+	// 시큐리티가 로그인 할때 이 메소드를 사용하겠다
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		log.info("login - loadUseByUSERname: " + username);
 		
-		Users user = userServiceImpl.login(null, null);
-		
-		if (user == null) {
+		Optional<Users> user = userRepository.findByUserId(username);
+					
+		if (user.isEmpty()) {
 			log.info("사용자 없없음... (일치하는 아이디가 없음)");
 			throw new UsernameNotFoundException("사용자를 찾을 수 없습니다." + username);
 		}
 		
 		log.info(username);
 			
+		CustomUser customUser = new CustomUser(user.get());
 		
-		// JWT x Security 3 - 시큐리티 설정 23: 08초
-		
-		return null;
+		 
+		return customUser;
 	}
 	
 	

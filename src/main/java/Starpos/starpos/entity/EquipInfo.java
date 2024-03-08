@@ -42,7 +42,7 @@ public class EquipInfo {
     private String userId;      
     
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "seq", referencedColumnName = "itemSeq")
+    @JoinColumn(name = "seq", referencedColumnName = "authSeq")
 	private Stats stats;
     
     public EquipInfoDto toDto() {

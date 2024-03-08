@@ -1,12 +1,10 @@
 package Starpos.starpos.serviceImpl;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
@@ -19,18 +17,22 @@ import Starpos.starpos.repository.UserAuthRepository;
 import Starpos.starpos.repository.UserRepository;
 import Starpos.starpos.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-
-	private PasswordEncoder passwordEncoder;
+	
+	private final PasswordEncoder passwordEncoder;
+		
 	private final UserRepository userRepository;
+		
 	private final UserAuthRepository userAuthRepository;
-	private AuthenticationManager authenticationManager;
+		
+	private final AuthenticationManager authenticationManager;	
+		
 	
 	// 저장
 	@Override

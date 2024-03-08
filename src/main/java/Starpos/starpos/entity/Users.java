@@ -1,8 +1,13 @@
 package Starpos.starpos.entity;
 
+import java.util.List;
+
 import Starpos.starpos.dto.UserDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +29,10 @@ public class Users{
 	private boolean isLogin;
 	private String status;
 	private String authority;
+		
+	@OneToMany
+	@JoinColumn(name = "userId", referencedColumnName = "userId")
+	private List<UserAuth> userAuth;
 	
 	public UserDto toDto() {
 		return UserDto.builder()
@@ -36,6 +45,7 @@ public class Users{
 			.isLogin(isLogin)
 			.status(status)
 			.authority(authority)
+			.userAuth(userAuth)
 			.build();
 	}
 	
