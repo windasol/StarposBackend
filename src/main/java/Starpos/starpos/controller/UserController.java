@@ -12,6 +12,9 @@ import Starpos.starpos.dto.UserDto;
 import Starpos.starpos.serviceImpl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Slf4j
@@ -20,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class UserController {
 	
-//	private final UserServiceImpl userServiceImpl;
+	private final UserServiceImpl userServiceImpl;
 	
 	/**
 	 * 사용자 정보 조회
@@ -41,6 +44,14 @@ public class UserController {
 		
 		return new ResponseEntity<>("UNAUTHORIZED", HttpStatus.UNAUTHORIZED);		
 	}
+	
+	@PostMapping("/join")
+	public void postMethodName(@RequestBody UserDto dto) {
+		userServiceImpl.insert(dto);
+		
+		log.info("회원가입 성공....");
+	}
+	
 	
 	
 }

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,22 +27,19 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 @Slf4j
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig {
 	
 	@Autowired
 	private CustomUserDetailService customUserDetailService;
-		
+	
 	private AuthenticationManager authenticationManager;
-//	
-//	@Bean    
-//    public AuthenticationManager authenticationManagerBean() throws Exception {
-//        return this.authenticationManagerBean();
-//    }
 	
-	@Autowired
-	private JwtTokenProvider jwtTokenProvider;
-		
+	private final JwtTokenProvider jwtTokenProvider;
 	
+	public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
+		this.jwtTokenProvider = jwtTokenProvider;
+	}
 	
 	// 암호화 알고리즘 방식 : Bcrypt
 	@Bean
@@ -74,7 +72,7 @@ public class SecurityConfig {
 				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 				.requestMatchers("/").permitAll()
 				.requestMatchers("/login").permitAll()
-				.requestMatchers("/user/**").hasAnyRole("USER", "ADMIN") //여러개 설정
+				.requestMatchers("/users/**").permitAll()
 				.requestMatchers("/admin/**").hasRole("ADMIN") //단일 설정
 				.anyRequest().authenticated()
 		);

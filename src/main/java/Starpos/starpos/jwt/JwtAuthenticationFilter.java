@@ -15,6 +15,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
 /**             (/login 경로일떄) 
@@ -43,6 +44,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	 *  filter 를 어떤 경로에만 거를 것인지 (login 경로 에서만)
 	 */
 	@Override
+	@Transactional
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
 		
@@ -55,6 +57,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		
 		// 사용자 인증정보 객체 생성
 		Authentication authentication = new UsernamePasswordAuthenticationToken(username, password);
+		
+		log.info("adasddassad : " + password);
 		
 		// 사용자 인증 (로그인) -- PasswordEncdoer 빈등록 해놔서 자동으로 타게 됨
 		authentication = authenticationManager.authenticate(authentication);
@@ -87,7 +91,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		int userNo = user.getUser().getUserSeq();
 		String userId = user.getUser().getUserId();
 		List<String> roles = user.getUser().getUserAuth().stream()
-													.map((auth) -> auth.getAuth())
+													.map((auth) -> auth.getAuth().toString())
 													.collect(Collectors.toList());
 		
 		// JWT 토큰 생성

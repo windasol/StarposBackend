@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 		if (save != null) {
 			UserAuth userAuth = UserAuth.builder()
 					.authSeq(0)
-					.userId(userPw)
+					.userId(dto.getUserId())
 					.auth("ROLE_USER")
 					.build();
 			userAuthRepository.save(userAuth);

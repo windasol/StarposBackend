@@ -35,7 +35,6 @@ public class CustomUserDetailService implements UserDetailsService {
 		log.info(username);
 			
 		CustomUser customUser = new CustomUser(user.get());
-		
 		 
 		return customUser;
 	}

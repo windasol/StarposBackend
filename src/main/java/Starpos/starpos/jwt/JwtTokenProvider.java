@@ -42,7 +42,6 @@ import lombok.extern.slf4j.Slf4j;
 public class JwtTokenProvider {
 		
 	private final JwtProps jwtProps;
-		
 	private final UserServiceImpl userServiceImpl;
 
 	/**
