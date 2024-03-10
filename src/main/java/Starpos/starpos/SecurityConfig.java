@@ -28,18 +28,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)
+@RequiredArgsConstructor
 public class SecurityConfig {
-	
-	@Autowired
-	private CustomUserDetailService customUserDetailService;
+		
+	private final CustomUserDetailService customUserDetailService;
 	
 	private AuthenticationManager authenticationManager;
 	
 	private final JwtTokenProvider jwtTokenProvider;
 	
-	public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
-		this.jwtTokenProvider = jwtTokenProvider;
-	}
 	
 	// 암호화 알고리즘 방식 : Bcrypt
 	@Bean

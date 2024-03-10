@@ -10,5 +10,5 @@ import lombok.Data;
 @ConfigurationProperties("com.dong.server")
 public class JwtProps {
 
-	private String secretKey;
+	private String secretKey = "dsfdsfdsfdsfdsfewfewfew1234124sdfsdfdsfdsdsfdsfsdfsdfsdfsdfsdfsdfdsf";
 }

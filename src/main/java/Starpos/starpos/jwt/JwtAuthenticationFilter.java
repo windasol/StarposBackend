@@ -58,12 +58,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		// 사용자 인증정보 객체 생성
 		Authentication authentication = new UsernamePasswordAuthenticationToken(username, password);
 		
-		log.info("adasddassad : " + password);
-		
 		// 사용자 인증 (로그인) -- PasswordEncdoer 빈등록 해놔서 자동으로 타게 됨
 		authentication = authenticationManager.authenticate(authentication);
 		
-		log.info("인증 야부 : " + authentication.isAuthenticated());
+		log.info("인증 여부 : " + authentication.isAuthenticated());
 		
 		// 인증 실패 (username, password 불일치)
 		if (!authentication.isAuthenticated()) {

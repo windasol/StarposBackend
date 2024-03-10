@@ -17,6 +17,7 @@ import Starpos.starpos.dto.CustomUser;
 import Starpos.starpos.dto.UserDto;
 import Starpos.starpos.entity.UserAuth;
 import Starpos.starpos.entity.Users;
+import Starpos.starpos.repository.UserRepository;
 import Starpos.starpos.serviceImpl.UserServiceImpl;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -42,7 +43,8 @@ import lombok.extern.slf4j.Slf4j;
 public class JwtTokenProvider {
 		
 	private final JwtProps jwtProps;
-	private final UserServiceImpl userServiceImpl;
+//	private final UserServiceImpl userServiceImpl;
+	private final UserRepository userRepository;
 
 	/**
 	 * 토큰 생성	  
@@ -121,7 +123,7 @@ public class JwtTokenProvider {
 			// 토크 유효하면
 			// name, email 도 담아주기
 			try {
-				Optional<UserDto> userInfo = userServiceImpl.select(no);
+				Optional<UserDto> userInfo = userRepository.findById(no).map(Users::toDto);
 				if (!userInfo.isPresent()) {
 					userInfo.ifPresent(d -> {
 						dto.setName(d.getName());
