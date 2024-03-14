@@ -31,7 +31,8 @@ public class ItemController {
 	private final CashInfoServiceImpl cashInfoServiceImpl;
 			
 	@GetMapping("/search-equip")
-	public List<EquipInfoDto> searchEquip(@RequestParam(value= "userId") String userId) {				
+	public List<EquipInfoDto> searchEquip(@RequestParam(value= "userId") String userId) {			
+			
 		return equipInfoServiceImpl.searchEquip(userId);		
 	}
 	
