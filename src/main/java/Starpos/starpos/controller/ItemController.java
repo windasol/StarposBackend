@@ -33,6 +33,7 @@ public class ItemController {
 	@GetMapping("/search-equip")
 	public List<EquipInfoDto> searchEquip(@RequestParam(value= "userId") String userId) {			
 			
+			
 		return equipInfoServiceImpl.searchEquip(userId);		
 	}
 	
