@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -28,16 +29,19 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)
-@RequiredArgsConstructor
 public class SecurityConfig {
 		
 	private final CustomUserDetailService customUserDetailService;
-	
-	private AuthenticationManager authenticationManager;
-	
+	private final AuthenticationManager authenticationManager;
 	private final JwtTokenProvider jwtTokenProvider;
 	
-	
+	@Lazy
+	public SecurityConfig(CustomUserDetailService customUserDetailService, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
+		this.customUserDetailService = customUserDetailService;
+		this.authenticationManager =  authenticationManager;
+		this.jwtTokenProvider = jwtTokenProvider;
+	}
+			
 	// 암호화 알고리즘 방식 : Bcrypt
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -70,6 +74,7 @@ public class SecurityConfig {
 				.requestMatchers("/").permitAll()
 				.requestMatchers("/login").permitAll()
 				.requestMatchers("/users/**").permitAll()
+				.requestMatchers("/api/item/**").permitAll()
 				.requestMatchers("/admin/**").hasRole("ADMIN") //단일 설정
 				.anyRequest().authenticated()
 		);
@@ -84,8 +89,8 @@ public class SecurityConfig {
 	// AuthenticationManager 빈 등록
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-		return this.authenticationManager = authenticationConfiguration.getAuthenticationManager();
-//		return authenticationConfiguration.getAuthenticationManager();
+//		return this.authenticationManager = authenticationConfiguration.getAuthenticationManager();
+		return authenticationConfiguration.getAuthenticationManager();
 //		return authenticationManager;
 	}
 	
