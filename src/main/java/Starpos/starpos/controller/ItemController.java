@@ -39,6 +39,7 @@ public class ItemController {
 	@GetMapping("/search-spend")
 	public List<SpendInfoDto> searchSpend(@RequestParam(value= "userId") String userId) {
 		return spendServiceImpl.searchSpend(userId);
+		
 	}
 	
 	@GetMapping("/search-etc")
