@@ -46,6 +46,7 @@ public class ItemController {
 	
 	@GetMapping("/search-etc")
 	public List<EtcInfoDto> searchEtc(@RequestParam(value= "userId") String userId) {
+		
 		return etcInfoServiceImpl.searchEtc(userId);
 	}
 	
