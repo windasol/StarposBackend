@@ -52,6 +52,7 @@ public class ItemController {
 	
 	@GetMapping("/search-cash")
 	public List<CashInfoDto> searchCash(@RequestParam(value= "userId") String userId) {
+		
 		return cashInfoServiceImpl.searchCash(userId);
 	}
 	
