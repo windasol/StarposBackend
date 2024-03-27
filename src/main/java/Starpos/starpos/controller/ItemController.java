@@ -57,6 +57,7 @@ public class ItemController {
 	
 	@PostMapping("/upgrade-equip")
 	public void upgradeEquip(@RequestBody EquipInfoDto dto) {		
+		
 		equipInfoServiceImpl.upgradeEquip(dto);
 	}
 	
