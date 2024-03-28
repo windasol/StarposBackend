@@ -62,7 +62,8 @@ public class ItemController {
 	}
 	
 	@PostMapping("/upgrade-spend")
-	public void upgradeSpend(@RequestBody SpendInfoDto dto) {		
+	public void upgradeSpend(@RequestBody SpendInfoDto dto) {	
+			
 		spendServiceImpl.upgradeSpend(dto);
 	}
 	
