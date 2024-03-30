@@ -69,6 +69,7 @@ public class ItemController {
 	
 	@PostMapping("/upgrade-etc")
 	public void upgradeEtc(@RequestBody EtcInfoDto dto) {		
+		
 		etcInfoServiceImpl.updateEtc(dto);
 	}
 	
